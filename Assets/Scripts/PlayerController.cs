@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour, IDamageable
 {
     private Rigidbody rb;
@@ -23,26 +25,40 @@ public class PlayerController : MonoBehaviour, IDamageable
     public LayerMask enemyMask;
     private List<GameObject> hitTargets = new List<GameObject>();
     public GameObject stepCheak;
-    private float hp = 100f;
+  
     private AudioSource audioSource;
     public AudioClip footstepClip;
     public AudioClip jumpClip;
     public AudioClip landClip;
     public AudioClip attackClip;
     public AudioClip hitClip;
+    public AudioClip blockHitClip;
+    public Slider hpSlider;
+    public Slider STASlider;
+    public float maxHealth = 100f;
+    public float maxSTA = 100f;
+    private float currentHealth;
+    private float currentSTA;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         isAttacking = false;
         audioSource = GetComponent<AudioSource>();
+        currentHealth = maxHealth;
+        currentSTA = maxSTA;
+        hpSlider.maxValue = maxHealth;
+        hpSlider.value = maxHealth;
+        STASlider.maxValue = maxSTA;
+        STASlider.value = maxSTA;
+        StartCoroutine(RecoverSTA());
     }
     //获取键盘wasd输入
     private void OnMove(InputValue value)
     {
-        Vector2 movement = value.Get<Vector2>();
-        horizontal = movement.x;
-        vertical = movement.y;
+            Vector2 movement = value.Get<Vector2>();
+            horizontal = movement.x;
+            vertical = movement.y;
     }
     // Update is called once per frame
     void Update()
@@ -62,12 +78,12 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         if (Input.GetButtonDown("Fire1") && attackPermission)
         {
-            Attack();
+            if (SpendSTA("Attack")) { Attack(); }
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            Jump();
+            if (SpendSTA("Jump")) { Jump(); }
         }
         //左右移动动画控制
         if (vertical == 0 && horizontal != 0) 
@@ -94,6 +110,8 @@ public class PlayerController : MonoBehaviour, IDamageable
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("TakeDamage"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Block"):
+            case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Block_Hit"):
+            case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"):
                 rb.isKinematic = true;
                 break;
             default:
@@ -150,7 +168,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         //在部分动画时，使用动画的位移和旋转
         if (rb.isKinematic)
         {
-            Vector3 deltaPos = animator.deltaPosition * 5;
+            Vector3 deltaPos = animator.deltaPosition * 10;
             Vector3 rayStart = transform.position + Vector3.up * 0.8f;
             int layerMask = ~LayerMask.GetMask("Player");
             if (Physics.Raycast(rayStart, transform.forward, out RaycastHit hit, deltaPos.magnitude + 0.2f, layerMask))
@@ -186,10 +204,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         //开启平滑转向攻击者的携程
         StartCoroutine(SmoothLookAt(transform.position));
             animator.SetTrigger("damage_trigger");
-            hp -= amount;
-            if (hp <= 0)
+            currentHealth -= amount;
+            hpSlider.value = currentHealth;
+        if (currentHealth <= 0)
             {
-
+            animator.SetTrigger("death_trigger");
             }
     }
     private void ApplyDamage(GameObject target, Vector3 hitPoint)
@@ -201,7 +220,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
     //爬台阶
-    void StepClimb()
+    private void StepClimb()
     {
         Vector3 stepCheakPoint = stepCheak.transform.position;
         float stepHeight = 0.5f;
@@ -217,6 +236,47 @@ public class PlayerController : MonoBehaviour, IDamageable
                 rb.position += new Vector3(0, climbSmooth * Time.deltaTime, 0);
             }
         }
+    }
+    public void PlayClip()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Move"))
+        {
+            audioSource.PlayOneShot(footstepClip, 0.7f);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+        {
+            audioSource.PlayOneShot(jumpClip, 1);
+        }
+
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            audioSource.PlayOneShot(attackClip);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("TakeDamage"))
+        {
+            audioSource.PlayOneShot(hitClip);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("BlockHit")) 
+        {
+            audioSource.PlayOneShot(blockHitClip);
+        }
+    }
+    //动作消耗体力方法
+    private bool SpendSTA(string action) 
+    {
+        if (action == "Attack" && currentSTA >= 30)
+        {
+            currentSTA -= 30;
+            STASlider.value = currentSTA;
+            return true;
+        }
+        else if (action == "Jump" && currentSTA >= 20)
+        {
+            currentSTA -= 20;
+            STASlider.value = currentSTA;
+            return true;
+        }
+        return false;
     }
     //平滑转向攻击者携程
     IEnumerator SmoothLookAt(Vector3 targetPosition)
@@ -242,28 +302,20 @@ public class PlayerController : MonoBehaviour, IDamageable
             transform.rotation = targetRotation;
         }
     }
-    public void footSoundsPlay() 
+    IEnumerator RecoverSTA() 
     {
-        
-    }
-    public void PlayClip()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Move"))
+        while (true) 
         {
-            audioSource.PlayOneShot(footstepClip, 0.7f);
-        }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
-        {
-            audioSource.PlayOneShot(jumpClip,1);
-        }
-        
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-        {
-            audioSource.PlayOneShot(attackClip);
-        }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("TakeDamage"))
-        {
-            audioSource.PlayOneShot(hitClip);
+            if (currentSTA < maxSTA)
+            {
+                currentSTA += 1;
+                if (currentSTA > maxSTA)
+                {
+                    currentSTA = maxSTA;
+                }
+                STASlider.value = currentSTA;
+            }
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

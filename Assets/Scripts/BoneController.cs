@@ -4,129 +4,127 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BoneController : MonoBehaviour,  IDamageable
 {
-    private int health = 30;
     public Animator animator;
-    private Rigidbody rb;
-    private float speed = 2f;
-    public GameObject groundCheckPoint;
-    private float groundCheckDistance = 0.1f;
-    public LayerMask groundMask;
-    private bool isGrounded;
-    private bool startAINaVi = false;
-    private GameObject target;
+    protected Rigidbody rb;
+    public float speed = 2f;
+    protected bool startAINaVi = false;
+    protected GameObject target;
     public NavMeshAgent agent;
     public GameObject stepCheak;
     public Transform rayStart;
     public Transform rayEnd;
-    public float radius = 0.2f;
-   private LayerMask targetMask;
-    private List<GameObject> hitTargets = new List<GameObject>();
-    private bool startDetectCollision = false;
-    public int attackSymbol = 1;
-    private string attackTriggerName = "";
-    private enum BoneState
+    protected float radius = 0.2f;
+    protected LayerMask targetMask;
+    protected List<GameObject> hitTargets = new List<GameObject>();
+    protected bool startDetectCollision = false;
+    public int attackIndex = 1;
+    protected int attackDamage = 0;
+    protected string attackTriggerName = "";
+    protected enum EnemyState
     {
         Chasing,
         Attack,
         Dead
     }
-    private BoneState currentState = BoneState.Chasing;
-    private float lastAttackTime = 0f;
-    private float attackCoolDown = 2f;
-    private GameObject player;
-    private Animator playerAnimator;
-    private AudioSource playerAudioSource;
-    private AudioSource enemytAudioSource;
-    public AudioClip blockClip;
+    protected EnemyState currentState = EnemyState.Chasing;
+    protected float lastAttackTime = 0f;
+    protected float attackCoolDown = 2f;
+    protected GameObject player;
+    protected Animator playerAnimator;
+    protected AudioSource enemytAudioSource;
+    private PlayerController playerController;
     public AudioClip slashClip;
     public AudioClip deathClip;
     public AudioClip screamClip;
+    protected float maxHP;
+    protected float currentHP;
+    public Slider slider;
+    //接口实现
+    void IDamageable.TakeDamage(float amount, Transform transform)
+    {
+        StartCoroutine(SmoothLookAt(transform.position));
+        animator.SetTrigger("damage_trigger");
+        currentHP -= (int)amount;
+        slider.value = currentHP;
+        if (currentHP <= 0)
+        {
+            Dead();
+            currentState = EnemyState.Dead;
+        }
+    }
     // startis called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(Scream());
+        animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = false;
-        StartCoroutine(BoneStateRuntine());
-        targetMask = LayerMask.GetMask("Player","Shield");
+        targetMask = LayerMask.GetMask("Player", "Shield");
+        attackDamage = 10;
         player = GameObject.FindGameObjectWithTag("Player");
         playerAnimator = player.GetComponent<Animator>();
-        playerAudioSource = player.GetComponent<AudioSource>();
+        playerController = player.GetComponent<PlayerController>();
         enemytAudioSource = GetComponent<AudioSource>();
+        maxHP = 30;
+        currentHP = maxHP;
+        slider.maxValue = maxHP;
+        slider.value = currentHP;
+        StartCoroutine(Scream());
+        StartCoroutine(EnemyStateRuntine());
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Physics.CheckSphere(groundCheckPoint.transform.position, groundCheckDistance, groundMask))
-        {
-            isGrounded = true; 
-        }
-               
-        if (startDetectCollision) 
-        {
-            DetectCollision();
-        }
+        if (startDetectCollision) { DetectCollision(); }
         StepClimb();
-        //攻击符号重置
-        if (attackSymbol > 2||Time.time - lastAttackTime > 4) 
-        {
-            attackSymbol = 1;
-        }
-        //更新攻击触发器名称
-        attackTriggerName = "attack_trigger" + attackSymbol;
+        RefreshAttackIndex(2);
     }
     void FixedUpdate() 
     {
-        //默认进场
-        if (isGrounded&&startAINaVi == false) 
+        if (startAINaVi == false)
         {
             Vector3 rbVelocity = transform.forward * speed;
             rb.linearVelocity = new Vector3(rbVelocity.x, rb.linearVelocity.y, rbVelocity.z);
             animator.SetFloat("speed", rbVelocity.z);
         }
     }
-    void Dead()
+    public void PlayClip() 
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BoneScream")) 
+        {
+            enemytAudioSource.PlayOneShot(screamClip,0.5f);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) 
+        {
+            enemytAudioSource.PlayOneShot(slashClip,0.7f);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("BoneDeath")) 
+        {
+            enemytAudioSource.PlayOneShot(deathClip);
+        }
+    }
+    public void RefreshAttackIndex(int n)
+    {
+        //如果超出攻击索引则返回1，攻击索引对应攻击动画；或者如果距离上次攻击时间超过4秒也返回1
+        if (attackIndex > n || Time.time - lastAttackTime > 4)
+        {
+            attackIndex = 1;
+        }
+        attackTriggerName = "attack_trigger" + attackIndex;
+    }
+    public void Dead()
     {
         animator.SetTrigger("death_trigger");
         StartCoroutine(DestroyAfterDeath());
     }
-    IEnumerator DestroyAfterDeath()
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-    }
-    void IDamageable.TakeDamage(float amount,Transform transform)
-    {
-        StartCoroutine(SmoothLookAt(transform.position));
-        animator.SetTrigger("damage_trigger");
-        health -= (int)amount;
-        if (health <= 0)
-        {
-            Dead();
-            currentState = BoneState.Dead;
-        }
-    }
-
-    IEnumerator Scream()
-    {
-        yield return new WaitForSeconds(1.5f);
-        animator.SetTrigger("scream_trigger");
-        animator.SetFloat("speed", 0);
-        startAINaVi = true;
-        StartCoroutine(BoneNavi());
-    }
-    IEnumerator BoneNavi() 
-    {
-        yield return new WaitForSeconds(1f);
-        agent.enabled = true;
-    }
-    void StepClimb()
+    public void StepClimb()
     {
         Vector3 stepCheakPoint = stepCheak.transform.position;
         float stepHeight = 0.5f;
@@ -143,53 +141,7 @@ public class BoneController : MonoBehaviour,  IDamageable
             }
         }
     }
-    IEnumerator BoneStateRuntine() 
-    {
-        while (true) 
-        {
-            float distanceToPlayer = Vector3.Distance(transform.position, target.transform.position);
-            if (distanceToPlayer <= 1.5f)
-            {
-                currentState = BoneState.Attack;
-            }
-            else
-            {
-                currentState = BoneState.Chasing;
-            }
-            BoneStateSwitch();
-            yield return new WaitForSeconds(0.2f);
-        }
-    }
-    //状态机
-    void BoneStateSwitch() 
-    {
-        if (agent.enabled)
-        {
-            switch (currentState) 
-            {
-                case BoneState.Chasing:
-                    agent.SetDestination(target.transform.position);
-                    animator.SetFloat("speed", agent.velocity.magnitude);
-                    break;
-                case BoneState.Attack:
-                    if (Time.time > lastAttackTime + attackCoolDown) 
-                    {
-                        lastAttackTime = Time.time;
-                        animator.SetFloat("speed", 0);
-                        hitTargets.Clear(); 
-                        animator.SetTrigger(attackTriggerName);
-                        
-                    }
-                    break;
-                case BoneState.Dead:
-                    agent.enabled = false;
-                    animator.SetFloat("speed", 0);
-                    break;
-            }
-            
-        }
-    }
-    private void DetectCollision()
+    public void DetectCollision()
     {
         //射线检测敌人
         Vector3 direction = rayEnd.position - rayStart.position;
@@ -205,13 +157,12 @@ public class BoneController : MonoBehaviour,  IDamageable
                 if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Block") && target.gameObject.layer == LayerMask.NameToLayer("Shield") && dot > 0.5f)
                 {
                     playerAnimator.SetTrigger("block_hit_trigger");
-                    playerAudioSource.PlayOneShot(blockClip);
                     hitTargets.Add(target);
                     startDetectCollision = false;
                     break;
                 }
                 else if (target.gameObject.layer == LayerMask.NameToLayer("Player"))
-                {               
+                {
                     ApplyDamage(target, hit.point);
                     hitTargets.Add(target);
                     startDetectCollision = false;
@@ -220,24 +171,67 @@ public class BoneController : MonoBehaviour,  IDamageable
             }
         }
     }
-    private void ApplyDamage(GameObject target, Vector3 hitPoint)
+    //状态机
+    public void EnemyStateSwitch()
     {
-        var damageable = target.GetComponent<IDamageable>();
-        if (damageable != null)
+        if (agent.enabled)
         {
-            damageable.TakeDamage(10f,transform);
+            switch (currentState)
+            {
+                case EnemyState.Chasing:
+                    agent.SetDestination(target.transform.position);
+                    animator.SetFloat("speed", agent.velocity.magnitude);
+                    break;
+                case EnemyState.Attack:
+                    if (Time.time > lastAttackTime + attackCoolDown)
+                    {
+                        lastAttackTime = Time.time;
+                        animator.SetFloat("speed", 0);
+                        hitTargets.Clear();
+                        animator.SetTrigger(attackTriggerName);
+
+                    }
+                    break;
+                case EnemyState.Dead:
+                    agent.enabled = false;
+                    animator.SetFloat("speed", 0);
+                    break;
+            }
+
         }
     }
-    public void StartDetectCollision() 
+    public void StartDetectCollision()
     {
         startDetectCollision = true;
     }
-    public void StopDetectCollision() 
+    public void StopDetectCollision()
     {
         startDetectCollision = false;
     }
+    private void ApplyDamage(GameObject target, Vector3 hitPoint)
+    {
+
+        var damageable = target.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(attackDamage, transform);
+        }
+    }
+    public IEnumerator Scream()
+    {
+        yield return new WaitForSeconds(1.5f);
+        animator.SetTrigger("scream_trigger");
+        animator.SetFloat("speed", 0);
+        startAINaVi = true;
+        StartCoroutine(EnemyNavi());
+    }
+    public IEnumerator EnemyNavi()
+    {
+        yield return new WaitForSeconds(1f);
+        agent.enabled = true;
+    }
     //平滑转向攻击者携程
-    IEnumerator SmoothLookAt(Vector3 targetPosition)
+    public IEnumerator SmoothLookAt(Vector3 targetPosition)
     {
         float elapsed = 0f;
         float duration = 0.15f;
@@ -260,27 +254,26 @@ public class BoneController : MonoBehaviour,  IDamageable
             transform.rotation = targetRotation;
         }
     }
-    public void PlayDeathSound() 
+    public IEnumerator EnemyStateRuntine()
     {
-        enemytAudioSource.PlayOneShot(deathClip);
+        while (true)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, target.transform.position);
+            if (distanceToPlayer <= 1.5f)
+            {
+                currentState = EnemyState.Attack;
+            }
+            else
+            {
+                currentState = EnemyState.Chasing;
+            }
+            EnemyStateSwitch();
+            yield return new WaitForSeconds(0.2f);
+        }
     }
-    public void PlayClip() 
+    public IEnumerator DestroyAfterDeath()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BoneScream")) 
-        {
-            enemytAudioSource.PlayOneShot(screamClip,0.5f);
-        }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) 
-        {
-            enemytAudioSource.PlayOneShot(slashClip,0.3f);
-        }
-    }
-    public void StopClip() 
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BoneScream"))
-        {
-            enemytAudioSource.Stop();
-        }
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 }
-//

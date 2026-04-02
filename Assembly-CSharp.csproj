@@ -49,6 +49,7 @@
     <Analyzer Include="D:\Unity\6000.3.10f1\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\FireBallController.cs" />
     <Compile Include="Assets\Golem\02_Golem\Scripts\AnimationButton.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\CameraController.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\ThirdPersonCamera.cs" />
@@ -60,20 +61,24 @@
     <Compile Include="Assets\BoneAsset\Skeleton\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\BaseAnimation\Characters\Humanoid Giant\Demo Scene\Scripts\HumanoidGiantDemo.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
+    <Compile Include="Assets\BoneTakeDamageStateBridge.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\UnityChanControlScriptWithRgidBody.cs" />
     <Compile Include="Assets\Dragon\Assets\Scripts\DragonExample.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\SpringBone.cs" />
+    <Compile Include="Assets\KOBAttackStateBridge.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\FaceUpdate.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\RandomWind.cs" />
     <Compile Include="Assets\Golem\02_Golem\Scripts\CharacterRotator.cs" />
+    <Compile Include="Assets\BoneAttackStateBridge.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\IKCtrlRightHand.cs" />
-    <Compile Include="Assets\AttackStateBridge.cs" />
     <Compile Include="Assets\BaseAnimation\Human Animations\Scripts\SpineProxy.cs" />
     <Compile Include="Assets\RPGAnimiation\Demo\DemoCameraController.cs" />
+    <Compile Include="Assets\Scripts\KingOfBoneController.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\SpringManager.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />
     <Compile Include="Assets\TakeDamageStateBridge.cs" />
+    <Compile Include="Assets\KOBDeathStateBridge.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\IdleChanger.cs" />
     <Compile Include="Assets\BoneAsset\Skeleton\Scripts\AnimationReplayer.cs" />
   </ItemGroup>

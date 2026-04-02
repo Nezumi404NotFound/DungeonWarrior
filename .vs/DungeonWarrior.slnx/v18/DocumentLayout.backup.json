@@ -3,28 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\bonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\mouselook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mouselook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\kingofbonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\kingofbonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBDeathStateBridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\KOBDeathStateBridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\kobattackstatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\kobattackstatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\bonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\boneattackstatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\boneattackstatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\bonetakedamagestatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\bonetakedamagestatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\fireballcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\fireballcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\attackstatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\attackstatebridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\idamageable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\idamageable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\mouselook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mouselook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBDeathStateBridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\KOBDeathStateBridge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +54,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "MouseLook.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MouseLook.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MouseLook.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MouseLook.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MouseLook.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAD4AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T11:12:31.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BoneTakeDamageStateBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\BoneTakeDamageStateBridge.cs",
+              "RelativeDocumentMoniker": "Assets\\BoneTakeDamageStateBridge.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\BoneTakeDamageStateBridge.cs",
+              "RelativeToolTip": "Assets\\BoneTakeDamageStateBridge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T02:48:06.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FireBallController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\FireBallController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FireBallController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\FireBallController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FireBallController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T06:54:54.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "SceneManager.cs",
               "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SceneManager.cs",
@@ -46,56 +103,58 @@
               "RelativeToolTip": "Assets\\Scripts\\SceneManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T14:39:44.531Z"
+              "WhenOpened": "2026-03-24T04:42:45.617Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "KOBAttackStateBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBAttackStateBridge.cs",
+              "RelativeDocumentMoniker": "Assets\\KOBAttackStateBridge.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBAttackStateBridge.cs",
+              "RelativeToolTip": "Assets\\KOBAttackStateBridge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T04:17:33.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BoneAttackStateBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\BoneAttackStateBridge.cs",
+              "RelativeDocumentMoniker": "Assets\\BoneAttackStateBridge.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\BoneAttackStateBridge.cs",
+              "RelativeToolTip": "Assets\\BoneAttackStateBridge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T04:14:14.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "BoneController.cs",
               "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\BoneController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\BoneController.cs",
               "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\BoneController.cs",
               "RelativeToolTip": "Assets\\Scripts\\BoneController.cs",
-              "ViewState": "AgIAAPcAAAAAAAAAAAAAwA8BAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAIwHwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T02:50:23.5Z",
+              "WhenOpened": "2026-03-23T06:54:01.623Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AttackStateBridge.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\AttackStateBridge.cs",
-              "RelativeDocumentMoniker": "Assets\\AttackStateBridge.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\AttackStateBridge.cs",
-              "RelativeToolTip": "Assets\\AttackStateBridge.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAwAwAAABQAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "KingOfBoneController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\KingOfBoneController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\KingOfBoneController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\KingOfBoneController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\KingOfBoneController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T11:40:17.294Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IDamageable.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\IDamageable.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\IDamageable.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\IDamageable.cs",
-              "RelativeToolTip": "Assets\\Scripts\\IDamageable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T02:52:38.411Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MouseLook.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MouseLook.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\MouseLook.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MouseLook.cs",
-              "RelativeToolTip": "Assets\\Scripts\\MouseLook.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-15T05:53:18.31Z"
+              "WhenOpened": "2026-03-24T06:44:54.925Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -105,10 +164,35 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
               "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ8AAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAqwDkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T05:11:41.109Z",
+              "WhenOpened": "2026-04-01T01:56:30.935Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "KOBDeathStateBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBDeathStateBridge.cs",
+              "RelativeDocumentMoniker": "Assets\\KOBDeathStateBridge.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBDeathStateBridge.cs",
+              "RelativeToolTip": "Assets\\KOBDeathStateBridge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T10:42:17.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "KOBDeathStateBridge.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBDeathStateBridge.cs",
+              "RelativeDocumentMoniker": "Assets\\KOBDeathStateBridge.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\KOBDeathStateBridge.cs",
+              "RelativeToolTip": "Assets\\KOBDeathStateBridge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T03:47:39.695Z"
             }
           ]
         }
