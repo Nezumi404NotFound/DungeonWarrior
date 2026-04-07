@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Block"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Block_Hit"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"):
+            case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerBlockHit"):
                 rb.isKinematic = true;
                 break;
             default:
@@ -168,7 +169,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         //在部分动画时，使用动画的位移和旋转
         if (rb.isKinematic)
         {
-            Vector3 deltaPos = animator.deltaPosition * 10;
+            Vector3 deltaPos = animator.deltaPosition * 5;
             Vector3 rayStart = transform.position + Vector3.up * 0.8f;
             int layerMask = ~LayerMask.GetMask("Player");
             if (Physics.Raycast(rayStart, transform.forward, out RaycastHit hit, deltaPos.magnitude + 0.2f, layerMask))

@@ -24,7 +24,7 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
     }
     protected EnemyState currentState = EnemyState.Chasing;
     protected float lastAttackTime = 0f;
-    protected float attackCoolDown = 3f;
+    protected float attackCoolDown = 4f;
     protected GameObject player;
     protected Animator playerAnimator;
     protected AudioSource playerAudioSource;
