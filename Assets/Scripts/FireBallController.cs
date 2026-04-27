@@ -7,9 +7,11 @@ public class FireBallController : MonoBehaviour
     public GameObject player;
     private Animator playerAnimator;
     private PlayerController playerController;
+    public GameObject enemy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
         player = GameObject.FindGameObjectWithTag("Player");
         playerAnimator = player.GetComponent<Animator>();
         playerController = player.GetComponent<PlayerController>();
@@ -25,12 +27,17 @@ public class FireBallController : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             var damageable = collision.gameObject.GetComponent<IDamageable>();
-            if (damageable != null)
+            float distance = Vector3.Distance(enemy.transform.position, player.transform.position);
+            if (damageable != null && distance < 2f)
+            {
+                damageable.TakeDamage(30, enemy.transform);
+            }
+            else 
             {
                 damageable.TakeDamage(30, transform);
             }
         }
-        else if (collision.collider.CompareTag("Shield")) 
+        else if (collision.collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block")) 
         {
             playerAnimator.SetTrigger("block_hit_trigger");
             playerController.PlayClip();

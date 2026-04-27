@@ -24,7 +24,7 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
     }
     protected EnemyState currentState = EnemyState.Chasing;
     protected float lastAttackTime = 0f;
-    protected float attackCoolDown = 4f;
+    protected float attackCoolDown = 0f;
     protected GameObject player;
     protected Animator playerAnimator;
     protected AudioSource playerAudioSource;
@@ -113,12 +113,17 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
                     animator.SetFloat("speed", agent.velocity.magnitude);
                     break;
                 case EnemyState.Attack:
-                    if (Time.time > lastAttackTime + attackCoolDown)
+                    if (agent.hasPath) 
                     {
+                        agent.ResetPath();
+                    }
+                    animator.SetFloat("speed", 0);
+                    if (Time.time > lastAttackTime + attackCoolDown)
+                    { 
                         lastAttackTime = Time.time;
-                        animator.SetFloat("speed", 0);
                         animator.SetTrigger("attack_trigger");
                         StartCoroutine(SmoothLookAt(player.transform.position));
+                        attackCoolDown = 4f;
                     }
                     break;
                 case EnemyState.Dead:

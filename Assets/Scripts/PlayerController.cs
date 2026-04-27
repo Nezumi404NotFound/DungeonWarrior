@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -25,7 +26,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     public LayerMask enemyMask;
     private List<GameObject> hitTargets = new List<GameObject>();
     public GameObject stepCheak;
-  
     private AudioSource audioSource;
     public AudioClip footstepClip;
     public AudioClip jumpClip;
@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float maxSTA = 100f;
     private float currentHealth;
     private float currentSTA;
+    public Camera playerCamera;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -226,13 +227,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 stepCheakPoint = stepCheak.transform.position;
         float stepHeight = 0.5f;
         float climbSmooth = 5f;
+        Vector3 moveDirection = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).normalized;
+        if (moveDirection.magnitude < 0.1f) return;
         //低射线检测
         RaycastHit hitLower;
-        if (Physics.Raycast(stepCheakPoint, transform.forward, out hitLower, 0.5f))
+        if (Physics.Raycast(stepCheakPoint, moveDirection, out hitLower, 0.5f, groundMask))
         {
             //高射线检测
             RaycastHit hitupper;
-            if (!Physics.Raycast(stepCheakPoint + new Vector3(0, stepHeight, 0), transform.forward, out hitupper, 1f))
+            if (!Physics.Raycast(stepCheakPoint + new Vector3(0, stepHeight, 0), moveDirection, out hitupper, 0.6f, groundMask))
             {
                 rb.position += new Vector3(0, climbSmooth * Time.deltaTime, 0);
             }
@@ -317,6 +320,15 @@ public class PlayerController : MonoBehaviour, IDamageable
                 STASlider.value = currentSTA;
             }
             yield return new WaitForSeconds(0.2f);
+        }
+    }
+    IEnumerator MovingCamara()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + 2f)
+        {
+            playerCamera.transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            yield return null;
         }
     }
 }

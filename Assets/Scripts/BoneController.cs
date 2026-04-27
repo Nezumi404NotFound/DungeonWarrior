@@ -183,6 +183,10 @@ public class BoneController : MonoBehaviour,  IDamageable
                     animator.SetFloat("speed", agent.velocity.magnitude);
                     break;
                 case EnemyState.Attack:
+                    if(agent.hasPath)
+                    {
+                        agent.ResetPath();
+                    }
                     if (Time.time > lastAttackTime + attackCoolDown)
                     {
                         lastAttackTime = Time.time;
