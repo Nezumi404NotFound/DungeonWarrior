@@ -14,10 +14,10 @@ public class SceneManager : MonoBehaviour
     public bool gameStart;
     public GameObject player;
     public Camera playerCamera;
-    private PlayerController playerController;
+    public PlayerController playerController;
     private Animator playerAnimator;
-    private PlayerInput playerInput;
-    private MouseLook mouseLook;
+    public PlayerInput playerInput;
+    public MouseLook mouseLook;
     public GameObject frontGate;
     public GameObject panel;
     public DialogueManager dialogueManager;
@@ -26,10 +26,12 @@ public class SceneManager : MonoBehaviour
     public GameObject bossAnimtionTrigger;
     private bool isMovingBossCamera = false;
     public GameObject dragon;
+    private DragonController dragonController;
     private Animator dragonAnimator;
     public GameObject musicManager;
     private AudioSource audioSource;
     public AudioClip bossRoomBGM;
+    public bool isInstantiatingEnemy = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,47 +42,31 @@ public class SceneManager : MonoBehaviour
         playerAnimator = player.GetComponent<Animator>();
         frontGate.GetComponent<Collider>().enabled = false;
         dragonAnimator = dragon.GetComponent<Animator>();
+        dragonController = dragon.GetComponent<DragonController>();
         StartCoroutine(PlayerDefault());
         canvas.enabled = false;
         dialogueManager = panel.GetComponent<DialogueManager>();
         dialogueManager.enabled = false;
         audioSource = musicManager.GetComponent<AudioSource>();
+        playerCamera.enabled = false;
+        mainCamara.enabled = true;
+        bossRoomCamera.enabled = false;
+        playerInput.enabled = false;
+        playerController.enabled = false;
+        mouseLook.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameStart) 
+        if (isInstantiatingEnemy) 
         {
-            playerCamera.enabled = false;
-            mainCamara.enabled = true;
-            bossRoomCamera.enabled = false;
-            playerInput.enabled = false;
-            playerController.enabled = false;
-            mouseLook.enabled = false;
+            StartCoroutine(InstantiateEnemy());
         }
     }
     private void FixedUpdate()
     {
-        if (gameStart) 
-        {
-            playerCamera.enabled = true;
-            mainCamara.enabled = false;
-            playerInput.enabled = true;
-            playerController.enabled = true;
-            mouseLook.enabled = true;
-            frontGate.GetComponent<Collider>().enabled = true;
-            if (!GameObject.FindGameObjectWithTag("Enemy") && enemyIndex <= enemys.Length - 1)
-            {
-                Instantiate(enemys[enemyIndex], enemySpawnPosition.transform.position, enemys[enemyIndex].transform.rotation);
-                enemyIndex++;
-            }
-            else if (!GameObject.FindGameObjectWithTag("Enemy") && enemyIndex == enemys.Length)
-            {
-                rearGate.GetComponent<Collider>().enabled = false;
-            }
-        }
-            CheckCollision();
+        CheckCollision();
     }
     //检测两个物体是否发生碰撞
     private void CheckCollision() 
@@ -91,13 +77,14 @@ public class SceneManager : MonoBehaviour
         {
             if (collider.CompareTag("Player")) 
             {
-                mainCamara.enabled = false;
+                playerCamera.enabled = false;
                 bossRoomCamera.enabled = true;
-                StartCoroutine(MovingCamara(bossRoomCamera,"bossRoomDialogue"));
                 isMovingBossCamera = true;
                 playerInput.enabled = false;
                 playerController.enabled = false;
                 mouseLook.enabled = false;
+                playerAnimator.SetFloat("Speed", 0);
+                StartCoroutine(MovingCamara(bossRoomCamera,"bossRoomDialogue"));
                 audioSource.generator = bossRoomBGM;
                 audioSource.Stop();
                 audioSource.Play();
@@ -115,6 +102,7 @@ public class SceneManager : MonoBehaviour
         }
         playerAnimator.SetFloat("Speed", 0);
         StartCoroutine(MovingCamara(mainCamara, "dialogue"));
+        yield return 0;
     }
     IEnumerator MovingCamara(Camera camara, string dialogueFileName) 
     {
@@ -125,11 +113,31 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
         canvas.enabled = true;
-        dialogueManager.dialogueFileName = dialogueFileName;
+        panel.SetActive(true);
         dialogueManager.enabled = true;
+        dialogueManager.OpenDialogue(dialogueFileName);
         if (isMovingBossCamera)
         {
             dragonAnimator.SetTrigger("scream_trigger");
+            StartCoroutine(dragonController.EnemyStateRountine());
+        }
+        yield return 0;
+    }
+    public IEnumerator InstantiateEnemy() 
+    {
+        isInstantiatingEnemy = false;
+        while (true) 
+        {
+            if (!GameObject.FindGameObjectWithTag("Enemy") && enemyIndex <= enemys.Length - 1)
+            {
+                Instantiate(enemys[enemyIndex], enemySpawnPosition.transform.position, enemys[enemyIndex].transform.rotation);
+                enemyIndex++;
+            }
+            else if (!GameObject.FindGameObjectWithTag("Enemy") && enemyIndex == enemys.Length)
+            {
+                rearGate.GetComponent<Collider>().enabled = false;
+            }
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

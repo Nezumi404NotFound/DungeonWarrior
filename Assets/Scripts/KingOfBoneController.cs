@@ -23,8 +23,6 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
         Dead
     }
     protected EnemyState currentState = EnemyState.Chasing;
-    protected float lastAttackTime = 0f;
-    protected float attackCoolDown = 0f;
     protected GameObject player;
     protected Animator playerAnimator;
     protected AudioSource playerAudioSource;
@@ -37,6 +35,7 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
     public Slider slider;
     public GameObject fireBall;
     public Transform firePosition;
+    private bool attackPermission;
     void IDamageable.TakeDamage(float amount, Transform transform)
     {
         StartCoroutine(SmoothLookAt(transform.position));
@@ -67,6 +66,7 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
         currentHP = maxHP;
         slider.maxValue = maxHP;
         slider.value = currentHP;
+        attackPermission = true;
         StartCoroutine(Scream());
         StartCoroutine(EnemyStateRuntine());
     }
@@ -118,12 +118,12 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
                         agent.ResetPath();
                     }
                     animator.SetFloat("speed", 0);
-                    if (Time.time > lastAttackTime + attackCoolDown)
+                    if (attackPermission)
                     { 
-                        lastAttackTime = Time.time;
                         animator.SetTrigger("attack_trigger");
                         StartCoroutine(SmoothLookAt(player.transform.position));
-                        attackCoolDown = 4f;
+                        attackPermission = false;
+                        StartCoroutine(AttackCoolDown());
                     }
                     break;
                 case EnemyState.Dead:
@@ -158,7 +158,7 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
     public void Dead() 
     {
         animator.SetTrigger("death_trigger");
-        StartCoroutine(DestroyAfterDeath());
+        StartCoroutine(DestroyAfterDeath(4));
     }
     public IEnumerator Scream()
     {
@@ -214,9 +214,14 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(0.1f);
         }
     }
-    public IEnumerator DestroyAfterDeath()
+    public IEnumerator AttackCoolDown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4);
+        attackPermission = true;
+    }
+    public IEnumerator DestroyAfterDeath(float n)
+    {
+        yield return new WaitForSeconds(n);
         Destroy(gameObject);
     }
 }

@@ -8,6 +8,17 @@ public class DragonController : MonoBehaviour
     private bool isFlying = false;
     private AudioSource audioSource;
     public AudioClip screamClip;
+    public GameObject player;
+    private bool attackPermission = true;
+    enum EnemyState 
+    {
+        idle,
+        drakaris,
+        fly,
+        dead
+    }
+    private EnemyState currentState;
+    /*四种状体，近距离啃咬，远距离喷火，飞行，死亡*/
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +29,8 @@ public class DragonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(currentState);
+        EnemyStateSwitch();
     }
     void PlayClip() 
     {
@@ -43,5 +55,41 @@ public class DragonController : MonoBehaviour
             transform.Translate(Vector3.up * 2 * Time.deltaTime);
             yield return null;
         }
+    }
+    public IEnumerator EnemyStateRountine() 
+    {
+        while (true) 
+        {
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            Debug.Log(distance);
+            if (distance > 4f&& distance < 9f)
+            {
+                currentState = EnemyState.drakaris;
+            }
+            else if (distance > 10f) 
+            {
+                currentState = EnemyState.idle;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    public void EnemyStateSwitch() 
+    {
+        if (attackPermission) 
+        {
+            switch (currentState)
+            {
+                case EnemyState.drakaris:
+                    animator.SetTrigger("drakaris_trigger");
+                    attackPermission = false;
+                    StartCoroutine(AttackCoolDown(4));
+                    break;
+            }
+        }
+    }
+    IEnumerator AttackCoolDown(float n) 
+    {
+        yield return new WaitForSeconds(n);
+        attackPermission = true;
     }
 }

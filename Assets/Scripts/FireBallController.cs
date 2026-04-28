@@ -39,6 +39,7 @@ public class FireBallController : MonoBehaviour
         }
         else if (collision.collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block")) 
         {
+            Debug.Log("true");
             playerAnimator.SetTrigger("block_hit_trigger");
             playerController.PlayClip();
         }

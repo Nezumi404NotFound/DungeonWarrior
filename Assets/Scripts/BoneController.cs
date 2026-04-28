@@ -31,8 +31,6 @@ public class BoneController : MonoBehaviour,  IDamageable
         Dead
     }
     protected EnemyState currentState = EnemyState.Chasing;
-    protected float lastAttackTime = 0f;
-    protected float attackCoolDown = 2f;
     protected GameObject player;
     protected Animator playerAnimator;
     protected AudioSource enemytAudioSource;
@@ -43,6 +41,7 @@ public class BoneController : MonoBehaviour,  IDamageable
     protected float maxHP;
     protected float currentHP;
     public Slider slider;
+    private bool attackPermission;
     //接口实现
     void IDamageable.TakeDamage(float amount, Transform transform)
     {
@@ -77,6 +76,7 @@ public class BoneController : MonoBehaviour,  IDamageable
         StartCoroutine(Scream());
         StartCoroutine(EnemyStateRuntine());
         target = GameObject.FindGameObjectWithTag("Player");
+        attackPermission = true;
     }
 
     // Update is called once per frame
@@ -113,7 +113,7 @@ public class BoneController : MonoBehaviour,  IDamageable
     public void RefreshAttackIndex(int n)
     {
         //如果超出攻击索引则返回1，攻击索引对应攻击动画；或者如果距离上次攻击时间超过4秒也返回1
-        if (attackIndex > n || Time.time - lastAttackTime > 4)
+        if (attackIndex > n)
         {
             attackIndex = 1;
         }
@@ -187,13 +187,13 @@ public class BoneController : MonoBehaviour,  IDamageable
                     {
                         agent.ResetPath();
                     }
-                    if (Time.time > lastAttackTime + attackCoolDown)
+                    if (attackPermission)
                     {
-                        lastAttackTime = Time.time;
                         animator.SetFloat("speed", 0);
                         hitTargets.Clear();
                         animator.SetTrigger(attackTriggerName);
-
+                        attackPermission = false;
+                        StartCoroutine(AttackCoolDown(2));
                     }
                     break;
                 case EnemyState.Dead:
@@ -274,6 +274,12 @@ public class BoneController : MonoBehaviour,  IDamageable
             EnemyStateSwitch();
             yield return new WaitForSeconds(0.2f);
         }
+    }
+    public IEnumerator AttackCoolDown(float n) 
+    {
+       yield return new WaitForSeconds(n);
+       attackPermission = true;
+        
     }
     public IEnumerator DestroyAfterDeath()
     {

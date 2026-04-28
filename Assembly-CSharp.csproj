@@ -53,6 +53,7 @@
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\SplashScreen\Scripts\SplashScreen.cs" />
     <Compile Include="Assets\Scripts\DragonController.cs" />
     <Compile Include="Assets\Scripts\BoneController.cs" />
+    <Compile Include="Assets\DragonStateBridge.cs" />
     <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\BoneAsset\Skeleton\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
