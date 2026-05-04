@@ -63,6 +63,7 @@
     <Compile Include="Assets\KOBAttackStateBridge.cs" />
     <Compile Include="Assets\BoneAttackStateBridge.cs" />
     <Compile Include="Assets\Scripts\Dialogue.cs" />
+    <Compile Include="Assets\ExitAnimationSetFireActiveFalse.cs" />
     <Compile Include="Assets\RPGAnimiation\Demo\DemoCameraController.cs" />
     <Compile Include="Assets\Scripts\KingOfBoneController.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />

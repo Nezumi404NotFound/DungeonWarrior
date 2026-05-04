@@ -37,9 +37,8 @@ public class FireBallController : MonoBehaviour
                 damageable.TakeDamage(30, transform);
             }
         }
-        else if (collision.collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Block")) 
+        else if (collision.collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("PlayerBlock")) 
         {
-            Debug.Log("true");
             playerAnimator.SetTrigger("block_hit_trigger");
             playerController.PlayClip();
         }

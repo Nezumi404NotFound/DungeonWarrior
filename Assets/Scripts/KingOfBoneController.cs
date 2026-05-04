@@ -158,7 +158,7 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
     public void Dead() 
     {
         animator.SetTrigger("death_trigger");
-        StartCoroutine(DestroyAfterDeath(4));
+        StartCoroutine(DestroyAfterDeath(2));
     }
     public IEnumerator Scream()
     {

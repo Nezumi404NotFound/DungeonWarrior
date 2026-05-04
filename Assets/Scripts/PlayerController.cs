@@ -165,6 +165,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         animator.SetTrigger("jump_trigger");
     }
+    public void Dead() 
+    {
+        animator.SetTrigger("death_trigger");
+        animator.enabled = false;
+    }
     private void OnAnimatorMove()
     {
         //在部分动画时，使用动画的位移和旋转
@@ -210,7 +215,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             hpSlider.value = currentHealth;
         if (currentHealth <= 0)
             {
-            animator.SetTrigger("death_trigger");
+                Dead();
             }
     }
     private void ApplyDamage(GameObject target, Vector3 hitPoint)
