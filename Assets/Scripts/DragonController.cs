@@ -11,9 +11,12 @@ public class DragonController : MonoBehaviour, IDamageable
     public AudioClip screamClip;
     public GameObject player;
     private bool attackPermission = true;
+    public GameObject bitePoint;
     public GameObject firePoint;
+    private bool biteDetect = false;
     private bool isFiring = false;
-    enum EnemyState 
+    private bool isBiting = false;
+    enum EnemyState
     {
         idle,
         bite,
@@ -22,13 +25,12 @@ public class DragonController : MonoBehaviour, IDamageable
         dead
     }
     private EnemyState currentState;
-    /*四种状体，近距离啃咬，远距离喷火，飞行，死亡*/
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         firePoint.SetActive(false);
+        StartCoroutine(DetectBite());
         StartCoroutine(DetectFire());
     }
 
@@ -36,55 +38,55 @@ public class DragonController : MonoBehaviour, IDamageable
     void Update()
     {
         EnemyStateSwitch();
-        Debug.Log(firePoint.activeInHierarchy);
+
     }
-    void PlayClip() 
+    void PlayClip()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Scream")) 
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Scream"))
         {
             audioSource.PlayOneShot(screamClip);
         }
     }
     private void OnAnimatorMove()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fly") && isFlying == false) 
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fly") && isFlying == false)
         {
             StartCoroutine(Fly());
         }
     }
-    IEnumerator Fly() 
+    IEnumerator Fly()
     {
         isFlying = true;
         float startTime = Time.time;
-        while (startTime + 2f > Time.time) 
+        while (startTime + 2f > Time.time)
         {
             transform.Translate(Vector3.up * 2 * Time.deltaTime);
             yield return null;
         }
     }
-    public IEnumerator EnemyStateRountine() 
+    public IEnumerator EnemyStateRountine()
     {
-        while (true) 
+        while (true)
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
-            if (distance <= 5f) 
+            if (distance <= 5f)
             {
                 currentState = EnemyState.bite;
             }
-            else if (distance > 5f&& distance < 9f)
+            else if (distance > 5f && distance < 9f)
             {
                 currentState = EnemyState.drakaris;
             }
-            else if (distance > 10f) 
+            else if (distance > 10f)
             {
                 currentState = EnemyState.idle;
             }
             yield return new WaitForSeconds(0.5f);
         }
     }
-    public void EnemyStateSwitch() 
+    public void EnemyStateSwitch()
     {
-        if (attackPermission) 
+        if (attackPermission)
         {
             switch (currentState)
             {
@@ -103,15 +105,23 @@ public class DragonController : MonoBehaviour, IDamageable
             }
         }
     }
-    public void AnimationEventSetFireActiveTrue() 
+    public void AnimationEventSetFireActiveTrue()
     {
         firePoint.SetActive(true);
     }
-    public void AnimationEventSetFireActiveFalse() 
+    public void AnimationEventSetFireActiveFalse()
     {
         firePoint.SetActive(false);
     }
-    public void Applydamage(GameObject target, float damage) 
+    public void AnimationEventSetBiteDetectTrue()
+    {
+        biteDetect = true;
+    }
+    public void AnimationEventSetBiteDetectFalse()
+    {
+        biteDetect = false;
+    }
+    public void Applydamage(GameObject target, float damage)
     {
         var damageable = target.GetComponent<IDamageable>();
         if (damageable != null)
@@ -123,7 +133,7 @@ public class DragonController : MonoBehaviour, IDamageable
     {
         throw new System.NotImplementedException();
     }
-    IEnumerator AttackCoolDown(float n) 
+    IEnumerator AttackCoolDown(float n)
     {
         yield return new WaitForSeconds(n);
         attackPermission = true;
@@ -151,24 +161,51 @@ public class DragonController : MonoBehaviour, IDamageable
             transform.rotation = targetRotation;
         }
     }
-    public IEnumerator DetectFire() 
+    public IEnumerator DetectFire()
     {
-        if (isFiring) yield break;
-        //检测场景是否存在火焰
-        if (firePoint.activeInHierarchy)
+        while (true)
         {
-            //龙焰攻击检测
-            RaycastHit hit;
-            if (Physics.SphereCast(firePoint.transform.position, 3.0f, firePoint.transform.forward, out hit, 10f))
+            if (isFiring) yield break;
+            //检测场景是否存在火焰
+            if (firePoint.activeInHierarchy)
             {
-                if (hit.collider.CompareTag("Player"))
+                //龙焰攻击检测
+                RaycastHit hit;
+                if (Physics.SphereCast(firePoint.transform.position, 2.0f, firePoint.transform.forward, out hit, 10f))
                 {
-                    isFiring = true;
-                    Applydamage(hit.collider.gameObject, 20);
-                    yield return new WaitForSeconds(1f);
-                    isFiring = false;
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        isFiring = true;
+                        Applydamage(hit.collider.gameObject, 20);
+                        yield return new WaitForSeconds(1f);
+                        isFiring = false;
+                    }
                 }
             }
+            yield return null;
+        }
+    }
+    public IEnumerator DetectBite() 
+    {
+        while (true) 
+        {   
+            if(isBiting) yield break;
+            if (biteDetect) 
+            {
+                Collider[] hitColliders = Physics.OverlapSphere(bitePoint.transform.position, 1.0f);
+                foreach (Collider collider in hitColliders) 
+                {
+                    if (collider.CompareTag("Player")) 
+                    {
+                        isBiting = true;
+                        Applydamage(collider.gameObject, 30);
+                        yield return new WaitForSeconds(1f);
+                        isBiting = false;
+                    }
+                }
+            }
+            yield return null;
         }
     }
 }
+

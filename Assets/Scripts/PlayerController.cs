@@ -168,7 +168,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Dead() 
     {
         animator.SetTrigger("death_trigger");
-        animator.enabled = false;
     }
     private void OnAnimatorMove()
     {
@@ -208,6 +207,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     void IDamageable.TakeDamage(float amount, Transform transform)
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Death")) return;
         //开启平滑转向攻击者的携程
         StartCoroutine(SmoothLookAt(transform.position));
             animator.SetTrigger("damage_trigger");
