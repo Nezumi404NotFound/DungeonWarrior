@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contentText;
-    public SceneManager sceneManagerCTL;
+    public MainSceneManager sceneManagerCTL;
     private List<DialogueLine> dialogueList;
     private int currentIndex;
     private float typingSpeed = 0.05f;
@@ -73,8 +73,8 @@ public class DialogueManager : MonoBehaviour
         }
         else 
         {
-            SceneManager sceneManager = Object.FindFirstObjectByType<SceneManager>();
-            sceneManager.mainCamara.enabled = false;
+            MainSceneManager sceneManager = Object.FindFirstObjectByType<MainSceneManager>();
+            sceneManager.mainCamera.enabled = false;
             sceneManager.bossRoomCamera.enabled = false;
             sceneManager.playerCamera.enabled = true;
             sceneManager.playerInput.enabled = true;

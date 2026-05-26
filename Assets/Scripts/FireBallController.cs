@@ -24,7 +24,7 @@ public class FireBallController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player")||(collision.collider.CompareTag("Shield") && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("PlayerBlock")))
         {
             var damageable = collision.gameObject.GetComponent<IDamageable>();
             float distance = Vector3.Distance(enemy.transform.position, player.transform.position);
@@ -32,12 +32,12 @@ public class FireBallController : MonoBehaviour
             {
                 damageable.TakeDamage(30, enemy.transform);
             }
-            else 
+            else
             {
                 damageable.TakeDamage(30, transform);
             }
         }
-        else if (collision.collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("PlayerBlock")) 
+        else if (collision.collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("PlayerBlock"))
         {
             playerAnimator.SetTrigger("block_hit_trigger");
             playerController.PlayClip();

@@ -1,12 +1,12 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DragonController : MonoBehaviour, IDamageable
 {
     private Animator animator;
     public Camera bossRoomCamera;
-    private bool isFlying = false;
     private AudioSource audioSource;
     public AudioClip screamClip;
     public GameObject player;
@@ -15,7 +15,12 @@ public class DragonController : MonoBehaviour, IDamageable
     public GameObject firePoint;
     private bool biteDetect = false;
     private bool isFiring = false;
-    private bool isBiting = false;
+    protected float maxHP;
+    protected float currentHP;
+    public Slider slider;
+    public GameObject musicManager;
+    public AudioClip BGM;
+    public GameObject sceneManager;
     enum EnemyState
     {
         idle,
@@ -29,6 +34,10 @@ public class DragonController : MonoBehaviour, IDamageable
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        maxHP = 100f;
+        currentHP = maxHP;
+        slider.maxValue = maxHP;
+        slider.value = currentHP;
         firePoint.SetActive(false);
         StartCoroutine(DetectBite());
         StartCoroutine(DetectFire());
@@ -45,23 +54,6 @@ public class DragonController : MonoBehaviour, IDamageable
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Scream"))
         {
             audioSource.PlayOneShot(screamClip);
-        }
-    }
-    private void OnAnimatorMove()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fly") && isFlying == false)
-        {
-            StartCoroutine(Fly());
-        }
-    }
-    IEnumerator Fly()
-    {
-        isFlying = true;
-        float startTime = Time.time;
-        while (startTime + 2f > Time.time)
-        {
-            transform.Translate(Vector3.up * 2 * Time.deltaTime);
-            yield return null;
         }
     }
     public IEnumerator EnemyStateRountine()
@@ -131,7 +123,19 @@ public class DragonController : MonoBehaviour, IDamageable
     }
     void IDamageable.TakeDamage(float amount, Transform transform)
     {
-        throw new System.NotImplementedException();
+        currentHP -= (int)amount;
+        slider.value = currentHP;
+        if (currentHP <= 0) 
+        {
+            Dead();
+        }
+    }
+    void Dead() 
+    {
+        currentState = EnemyState.dead;
+        animator.SetTrigger("dead_trigger");
+        StartCoroutine(WhenDeadSetSound());
+        this.enabled = false;
     }
     IEnumerator AttackCoolDown(float n)
     {
@@ -173,7 +177,16 @@ public class DragonController : MonoBehaviour, IDamageable
                 RaycastHit hit;
                 if (Physics.SphereCast(firePoint.transform.position, 2.0f, firePoint.transform.forward, out hit, 10f))
                 {
-                    if (hit.collider.CompareTag("Player"))
+                    if (hit.collider.CompareTag("Shield")) 
+                    {
+                        var playerAnimator = hit.collider.GetComponentInParent<Animator>();
+                        if (playerAnimator != null)
+                        {
+                            playerAnimator.SetTrigger("block_hit_trigger");
+                            yield return new WaitForSeconds(0.05f);
+                        }
+                    }
+                    else if (hit.collider.CompareTag("Player"))
                     {
                         isFiring = true;
                         Applydamage(hit.collider.gameObject, 20);
@@ -182,30 +195,54 @@ public class DragonController : MonoBehaviour, IDamageable
                     }
                 }
             }
-            yield return null;
+            yield return new WaitForSeconds(0.02f);
         }
     }
     public IEnumerator DetectBite() 
     {
         while (true) 
         {   
-            if(isBiting) yield break;
             if (biteDetect) 
             {
                 Collider[] hitColliders = Physics.OverlapSphere(bitePoint.transform.position, 1.0f);
                 foreach (Collider collider in hitColliders) 
                 {
-                    if (collider.CompareTag("Player")) 
+                    var playerAnimator = collider.GetComponentInParent<Animator>();
+                    if (collider.CompareTag("Shield") && playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Block")) 
                     {
-                        isBiting = true;
+                        playerAnimator.SetTrigger("block_hit_trigger");
+                        yield return new WaitForSeconds(1f);
+                        break;
+                    }
+                    else if (collider.CompareTag("Player")) 
+                    {
                         Applydamage(collider.gameObject, 30);
                         yield return new WaitForSeconds(1f);
-                        isBiting = false;
+                        break;
                     }
                 }
             }
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+    IEnumerator WhenDeadSetSound() 
+    {
+        audioSource.PlayOneShot(screamClip, 0.5f);
+        AudioSource sceneAudioSouce = musicManager.GetComponent<AudioSource>();
+        float startTime = 0f;
+        float fadeDuration = 1.5f;
+        while (startTime < fadeDuration)
+        {
+            startTime += Time.deltaTime;
+            sceneAudioSouce.volume -= Time.deltaTime * 0.1f;
             yield return null;
         }
+        sceneAudioSouce.volume = 1f;
+        sceneAudioSouce.generator = BGM;
+        sceneAudioSouce.Stop();
+        sceneAudioSouce.Play();
+        MainSceneManager mainSceneManager = sceneManager.GetComponent<MainSceneManager>();
+        mainSceneManager.isFinish = true;
     }
 }
 

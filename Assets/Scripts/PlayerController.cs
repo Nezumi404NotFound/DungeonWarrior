@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Transactions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,14 +26,20 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float radius = 0.2f;
     public LayerMask enemyMask;
     private List<GameObject> hitTargets = new List<GameObject>();
+    private List<IDamageable> hitInterfaces = new List<IDamageable>();
     public GameObject stepCheak;
+    public GameObject weapon;
     private AudioSource audioSource;
     public AudioClip footstepClip;
     public AudioClip jumpClip;
     public AudioClip landClip;
-    public AudioClip attackClip;
     public AudioClip hitClip;
     public AudioClip blockHitClip;
+    public AudioClip attackClip1;
+    public AudioClip attackClip2;
+    public AudioClip attackClip3;
+    public AudioClip weaponClip;
+    public AudioClip deathClip;
     public Slider hpSlider;
     public Slider STASlider;
     public float maxHealth = 100f;
@@ -40,6 +47,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     private float currentHealth;
     private float currentSTA;
     public Camera playerCamera;
+    private IDamageable damageble;
+    public AudioClip playerWinClip;
+    private bool useAnimationMoving = false;
+    public bool isPlayerDead = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -103,24 +114,22 @@ public class PlayerController : MonoBehaviour, IDamageable
             animator.SetBool("is_run_right", false);
             animator.SetBool("is_run_left", false);
         }
-
-        //动画状态控制刚体
-        switch (true)
+        switch (true) 
         {
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"):
-            case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("TakeDamage"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"):
+            case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("TakeDamage"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Block"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Block_Hit"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"):
             case bool _ when animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerBlockHit"):
-                rb.isKinematic = true;
+                useAnimationMoving = true;
                 break;
             default:
-                rb.isKinematic = false;
+                useAnimationMoving = false;
                 break;
         }
-        if (isAttacking)
+            if (isAttacking)
         {
             DetectCollision();
         }
@@ -135,14 +144,16 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     private void FixedUpdate()
     {
-        //处于攻击动画时禁止移动
-        if (rb.isKinematic)
+        if (!useAnimationMoving)
         {
-            return;
+            Vector3 velocity = transform.forward * vertical * movingSpeed + transform.right * horizontal * movingSpeed;
+            rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+            StepClimb();
         }
-        //根据输入计算移动
-        Vector3 velocity = transform.forward * vertical * movingSpeed + transform.right * horizontal * movingSpeed;
-        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+        else
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        }
         //上台阶
         StepClimb();
     }
@@ -150,12 +161,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         animator.SetTrigger("attack_trigger");
         lastAttackTime = Time.time;
-        hitTargets.Clear();
+        hitInterfaces.Clear();
     }
     private void AttackStart()
     {
         isAttacking = true;
         PlayClip();
+        PlayWeaponClip();
     }
     private void AttackStop()
     {
@@ -168,25 +180,34 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Dead() 
     {
         animator.SetTrigger("death_trigger");
+        audioSource.PlayOneShot(deathClip);
+        isPlayerDead = true;
     }
     private void OnAnimatorMove()
     {
-        //在部分动画时，使用动画的位移和旋转
-        if (rb.isKinematic)
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        if (useAnimationMoving)
         {
-            Vector3 deltaPos = animator.deltaPosition * 5;
+            playerInput.enabled = false;
+            Vector3 deltaPos = animator.deltaPosition;
+            float gravityEffect = Physics.gravity.y * Time.deltaTime * Time.deltaTime * 0.5f;
+            deltaPos.y += gravityEffect;
             Vector3 rayStart = transform.position + Vector3.up * 0.8f;
             int layerMask = ~LayerMask.GetMask("Player");
-            if (Physics.Raycast(rayStart, transform.forward, out RaycastHit hit, deltaPos.magnitude + 0.2f, layerMask))
+            if (Physics.Raycast(rayStart, transform.forward, out RaycastHit hit, deltaPos.magnitude + 0.3f, layerMask))
             {
                 deltaPos = Vector3.zero;
             }
-            else if (Physics.Raycast(rayStart, -transform.forward, out hit, deltaPos.magnitude + 0.2f, layerMask))
+            else if (Physics.Raycast(rayStart, -transform.forward, out hit, deltaPos.magnitude + 0.3f, layerMask))
             {
                 deltaPos = Vector3.zero;
             }
             rb.MovePosition(rb.position + deltaPos);
             rb.MoveRotation(rb.rotation * animator.deltaRotation);
+        }
+        else 
+        {
+            playerInput.enabled = true;
         }
     }
     private void DetectCollision()
@@ -198,10 +219,18 @@ public class PlayerController : MonoBehaviour, IDamageable
         foreach (RaycastHit hit in hits)
         {
             GameObject target = hit.collider.gameObject;
-            if (!hitTargets.Contains(target))
+            if (target.layer == LayerMask.NameToLayer("Dragon")) 
             {
-                hitTargets.Add(target);
-                ApplyDamage(target, hit.point);
+                damageble = target.GetComponentInParent<IDamageable>();
+            }
+             else
+            {
+                damageble = target.GetComponent<IDamageable>();
+            }
+            if (damageble != null && !hitInterfaces.Contains(damageble))
+            {
+                hitInterfaces.Add(damageble);
+                damageble.TakeDamage(10f, transform);
             }
         }
     }
@@ -217,14 +246,6 @@ public class PlayerController : MonoBehaviour, IDamageable
             {
                 Dead();
             }
-    }
-    private void ApplyDamage(GameObject target, Vector3 hitPoint)
-    {
-        var damageable = target.GetComponent<IDamageable>();
-        if (damageable != null)
-        {
-            damageable.TakeDamage(10f, transform);
-        }
     }
     //爬台阶
     private void StepClimb()
@@ -250,16 +271,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Move"))
         {
-            audioSource.PlayOneShot(footstepClip, 0.7f);
+            audioSource.PlayOneShot(footstepClip);
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
         {
             audioSource.PlayOneShot(jumpClip, 1);
-        }
-
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-        {
-            audioSource.PlayOneShot(attackClip);
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("TakeDamage"))
         {
@@ -269,6 +285,23 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             audioSource.PlayOneShot(blockHitClip);
         }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerAttack1"))
+        {
+            audioSource.PlayOneShot(attackClip1);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerAttack2"))
+        {
+            audioSource.PlayOneShot(attackClip2);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerAttack3"))
+        {
+            audioSource.PlayOneShot(attackClip3);
+        }
+    }
+    public void PlayWeaponClip()
+    {
+       AudioSource weaponAudioSource = weapon.GetComponent<AudioSource>();
+       weaponAudioSource.PlayOneShot(weaponClip);
     }
     //动作消耗体力方法
     private bool SpendSTA(string action) 

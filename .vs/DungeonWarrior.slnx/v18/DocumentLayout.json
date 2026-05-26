@@ -3,32 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\SceneManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\buttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\bonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MainSceneManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\MainSceneManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\dialoguemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dialoguemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\dragoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dragoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\StreamingAssets\\dialogue.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\StreamingAssets\\dialogue.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\titleplayercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\titleplayercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\dialogue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dialogue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\mouselook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mouselook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\SceneManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\dialoguemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dialoguemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\fireballcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\fireballcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\volumecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\volumecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\nezumi\\documents\\unity projects\\dungeonwarrior\\assets\\scripts\\kingofbonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\kingofbonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,44 +50,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DialogueManager.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\DialogueManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DialogueManager.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\DialogueManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DialogueManager.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAA1wFEAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T03:42:10.93Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "dialogue.json",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\StreamingAssets\\dialogue.json",
-              "RelativeDocumentMoniker": "Assets\\StreamingAssets\\dialogue.json",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\StreamingAssets\\dialogue.json",
-              "RelativeToolTip": "Assets\\StreamingAssets\\dialogue.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-11T14:08:48.708Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BoneController.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\BoneController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\BoneController.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\BoneController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\BoneController.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAiwCYAAAAuAAAAAAAAAA==",
+              "Title": "TitlePlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\TitlePlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\TitlePlayerController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\TitlePlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TitlePlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T08:40:12.495Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Dialogue.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\Dialogue.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Dialogue.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\Dialogue.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Dialogue.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T08:07:21.552Z"
+              "WhenOpened": "2026-05-15T14:28:09.121Z"
             },
             {
               "$type": "Document",
@@ -85,46 +84,97 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
               "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAiwM0AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T07:44:01.933Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DialogueManager.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\DialogueManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\DialogueManager.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\DialogueManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\DialogueManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T12:08:43.251Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SceneManager.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SceneManager.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SceneManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T12:28:40.392Z",
+              "WhenOpened": "2026-05-14T21:57:42.282Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SceneManager.cs",
-              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SceneManager.cs",
-              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\SceneManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SceneManager.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAgwFMAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "FireBallController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\FireBallController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FireBallController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\FireBallController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FireBallController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T08:34:54.502Z"
+              "WhenOpened": "2026-05-14T16:24:45.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DragonController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\DragonController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DragonController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\DragonController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DragonController.cs",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAIwAgAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T11:09:29.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "VolumeController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\VolumeController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\VolumeController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\VolumeController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\VolumeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T13:49:41.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "KingOfBoneController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\KingOfBoneController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\KingOfBoneController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\KingOfBoneController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\KingOfBoneController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:24:39.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainSceneManager.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MainSceneManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MainSceneManager.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MainSceneManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MainSceneManager.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAUwMwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T06:08:59.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ButtonController.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\ButtonController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ButtonController.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\ButtonController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ButtonController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAlwCAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T15:47:18.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MouseLook.cs",
+              "DocumentMoniker": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MouseLook.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MouseLook.cs",
+              "ToolTip": "C:\\Users\\Nezumi\\Documents\\Unity Projects\\DungeonWarrior\\Assets\\Scripts\\MouseLook.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MouseLook.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwAcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T18:30:00.353Z"
             }
           ]
         }

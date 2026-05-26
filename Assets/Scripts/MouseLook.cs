@@ -5,7 +5,7 @@ public class MouseLook : MonoBehaviour
 {
     public InputActionAsset actions;
     private InputAction lookAction;
-    public float sensitivity = 10f;
+    public float sensitivity = 5f;
     public Transform playerBody;
     float xRotation = 0f;
     public GameObject player;

@@ -54,20 +54,23 @@
     <Compile Include="Assets\Scripts\DragonController.cs" />
     <Compile Include="Assets\Scripts\BoneController.cs" />
     <Compile Include="Assets\DragonStateBridge.cs" />
-    <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\BoneAsset\Skeleton\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\BoneTakeDamageStateBridge.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\VolumeController.cs" />
     <Compile Include="Assets\Dragon\Assets\Scripts\DragonExample.cs" />
+    <Compile Include="Assets\Scripts\MainSceneManager.cs" />
     <Compile Include="Assets\KOBAttackStateBridge.cs" />
     <Compile Include="Assets\BoneAttackStateBridge.cs" />
+    <Compile Include="Assets\Scripts\TitlePlayerController.cs" />
     <Compile Include="Assets\Scripts\Dialogue.cs" />
     <Compile Include="Assets\ExitAnimationSetFireActiveFalse.cs" />
     <Compile Include="Assets\RPGAnimiation\Demo\DemoCameraController.cs" />
     <Compile Include="Assets\Scripts\KingOfBoneController.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />
     <Compile Include="Assets\TakeDamageStateBridge.cs" />
+    <Compile Include="Assets\Scripts\ButtonController.cs" />
     <Compile Include="Assets\Scripts\DialogueManager.cs" />
     <Compile Include="Assets\KOBDeathStateBridge.cs" />
     <Compile Include="Assets\BoneAsset\Skeleton\Scripts\AnimationReplayer.cs" />
@@ -1385,6 +1388,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Campfire.csproj" />
+    <ProjectReference Include="Abiogenesis3d.Shared.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>
