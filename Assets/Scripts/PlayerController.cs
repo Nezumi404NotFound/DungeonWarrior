@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         STASlider.value = maxSTA;
         StartCoroutine(RecoverSTA());
     }
-    //获取键盘wasd输入
+    // キーボードのWASD入力を取得
     private void OnMove(InputValue value)
     {
             Vector2 movement = value.Get<Vector2>();
@@ -76,10 +76,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     void Update()
     {
         animator.SetFloat("Speed", vertical * movingSpeed);
-        //判断是否着地
+        // 着地しているかどうかを判定
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool("is_grounded", isGrounded);
-        //攻击冷却
+        // 攻撃のクールダウン
         if (Time.time - lastAttackTime > 0.5f)
         {
             attackPermission = true;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             if (SpendSTA("Jump")) { Jump(); }
         }
-        //左右移动动画控制
+        // 左右移動アニメーション制御
         if (vertical == 0 && horizontal != 0) 
         {
             if (horizontal > 0)
@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
-        //上台阶
+        // 段差を上る
         StepClimb();
     }
     private void Attack()
@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     private void DetectCollision()
     {
-        //射线检测敌人
+        // レイキャストで敵を検知
         Vector3 direction = rayEnd.position - rayStart.position;
         float distance = direction.magnitude;
         RaycastHit[] hits = Physics.SphereCastAll(rayStart.position, radius, direction.normalized, distance, enemyMask);
@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     void IDamageable.TakeDamage(float amount, Transform transform)
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Death")) return;
-        //开启平滑转向攻击者的携程
+        // 攻撃者へスムーズに振り向くコルーチンを開始
         StartCoroutine(SmoothLookAt(transform.position));
             animator.SetTrigger("damage_trigger");
             currentHealth -= amount;
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 Dead();
             }
     }
-    //爬台阶
+    // 段差の乗り越え処理
     private void StepClimb()
     {
         Vector3 stepCheakPoint = stepCheak.transform.position;
@@ -255,11 +255,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         float climbSmooth = 5f;
         Vector3 moveDirection = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).normalized;
         if (moveDirection.magnitude < 0.1f) return;
-        //低射线检测
+        // 低い位置のレイキャスト検知
         RaycastHit hitLower;
         if (Physics.Raycast(stepCheakPoint, moveDirection, out hitLower, 0.5f, groundMask))
         {
-            //高射线检测
+            // 高い位置のレイキャスト検知
             RaycastHit hitupper;
             if (!Physics.Raycast(stepCheakPoint + new Vector3(0, stepHeight, 0), moveDirection, out hitupper, 0.6f, groundMask))
             {
@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour, IDamageable
        AudioSource weaponAudioSource = weapon.GetComponent<AudioSource>();
        weaponAudioSource.PlayOneShot(weaponClip);
     }
-    //动作消耗体力方法
+    // アクションによるスタミナ消費処理
     private bool SpendSTA(string action) 
     {
         if (action == "Attack" && currentSTA >= 30)
@@ -320,13 +320,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         return false;
     }
-    //平滑转向攻击者携程
+    // 攻撃者へスムーズに振り向くコルーチン
     IEnumerator SmoothLookAt(Vector3 targetPosition)
     {
         float elapsed = 0f;
         float duration = 0.15f;
         Quaternion startRotation = transform.rotation;
-        //计算水平方向
+        // 水平方向の計算
         Vector3 direction = (targetPosition - transform.position).normalized;
         direction.y = 0;
         if (direction != Vector3.zero)
@@ -334,13 +334,13 @@ public class PlayerController : MonoBehaviour, IDamageable
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             while (elapsed < duration)
             {
-                //平滑过渡，Quaternion.Slerp函数在两个旋转之间进行球面线性插值，返回一个新的旋转，第三个参数控制插值的程度，0返回startRotation，1返回targetRotation
+                // スムーズな遷移：Quaternion.Slerp関数は2つの回転間を球面線形補間し、新しい回転を返す。第3引数で補間の度合いを制御し、0ならstartRotation、1ならtargetRotationを返す。
                 transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / duration);
-                //增量时间，逐渐增加elapsed的值，直到达到duration
+                // 経過時間：durationに達するまで、elapsedの値を徐々に増加させる
                 elapsed += Time.deltaTime;
                 yield return null;
             }
-            //确保最终旋转是目标旋转
+            // 最終的な回転が目標の回転（targetRotation）になることを保証する
             transform.rotation = targetRotation;
         }
     }

@@ -64,6 +64,5 @@ IEnumerator ExitAfterPlayCLip()
     {
         yield return new WaitForSeconds(exitClip.length);
         Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false;(退出编辑器)
     }
 }

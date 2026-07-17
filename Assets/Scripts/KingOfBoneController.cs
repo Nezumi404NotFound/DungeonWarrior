@@ -90,11 +90,11 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
         Vector3 stepCheakPoint = stepCheck.transform.position;
         float stepHeight = 0.5f;
         float climbSmooth = 5f;
-        //低射线检测
+        // 低い位置のレイキャスト検知
         RaycastHit hitLower;
         if (Physics.Raycast(stepCheakPoint, transform.forward, out hitLower, 0.5f))
         {
-            //高射线检测
+            // 高い位置のレイキャスト検知
             RaycastHit hitupper;
             if (!Physics.Raycast(stepCheakPoint + new Vector3(0, stepHeight, 0), transform.forward, out hitupper, 1f))
             {
@@ -187,13 +187,13 @@ public class KingOfBoneController : MonoBehaviour, IDamageable
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             while (elapsed < duration)
             {
-                //平滑过渡，Quaternion.Slerp函数在两个旋转之间进行球面线性插值，返回一个新的旋转，第三个参数控制插值的程度，0返回startRotation，1返回targetRotation
+                // スムーズな遷移：Quaternion.Slerp関数は2つの回転間を球面線形補間し、新しい回転を返す。第3引数で補間の度合いを制御し、0ならstartRotation、1ならtargetRotationを返す。
                 transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / duration);
-                //增量时间，逐渐增加elapsed的值，直到达到duration
+                // 経過時間：durationに達するまで、elapsedの値を徐々に増加させる
                 elapsed += Time.deltaTime;
                 yield return null;
             }
-            //确保最终旋转是目标旋转
+            // 最終的な回転が目標の回転（targetRotation）になることを保証する
             transform.rotation = targetRotation;
         }
     }

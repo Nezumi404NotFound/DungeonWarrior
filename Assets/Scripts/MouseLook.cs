@@ -20,7 +20,7 @@ public class MouseLook : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // 隐藏鼠标指针并锁定在屏幕中心
+        // マウスカーソルを非表示にし、画面中央にロック
         Cursor.lockState = CursorLockMode.Locked;
         animator = player.GetComponent<Animator>();
         rb = player.GetComponent<Rigidbody>();
@@ -35,7 +35,7 @@ public class MouseLook : MonoBehaviour
         }
         else 
         {
-            //获取鼠标输入
+            // マウス入力を取得
             Vector2 lookInput = lookAction.ReadValue<Vector2>();
             float mouseX = lookInput.x * sensitivity * Time.deltaTime;
             float mouseY = lookInput.y * sensitivity * Time.deltaTime;
@@ -55,9 +55,9 @@ public class MouseLook : MonoBehaviour
                 animator.SetBool("is_turn_right", false);
                 animator.SetBool("is_turn_left", false);
             }
-            //反向旋转摄像机
+            // カメラを反転回転
             xRotation -= mouseY;
-            //限制摄像机旋转范围
+            // カメラの回転範囲を制限
             xRotation = Mathf.Clamp(xRotation, 10f, 30f);
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);

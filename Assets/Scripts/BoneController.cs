@@ -112,7 +112,7 @@ public class BoneController : MonoBehaviour,  IDamageable
     }
     public void RefreshAttackIndex(int n)
     {
-        //如果超出攻击索引则返回1，攻击索引对应攻击动画；或者如果距离上次攻击时间超过4秒也返回1
+        // 攻撃インデックスが上限を超えた場合、または最後の攻撃から4秒以上経過した場合は1を返す（攻撃インデックスは攻撃アニメーションに対応）
         if (attackIndex > n)
         {
             attackIndex = 1;
@@ -129,11 +129,11 @@ public class BoneController : MonoBehaviour,  IDamageable
         Vector3 stepCheakPoint = stepCheak.transform.position;
         float stepHeight = 0.5f;
         float climbSmooth = 5f;
-        //低射线检测
+        // 低い位置のレイキャスト検知
         RaycastHit hitLower;
         if (Physics.Raycast(stepCheakPoint, transform.forward, out hitLower, 0.5f))
         {
-            //高射线检测
+            // 高い位置のレイキャスト検知
             RaycastHit hitupper;
             if (!Physics.Raycast(stepCheakPoint + new Vector3(0, stepHeight, 0), transform.forward, out hitupper, 1f))
             {
@@ -143,7 +143,7 @@ public class BoneController : MonoBehaviour,  IDamageable
     }
     public void DetectCollision()
     {
-        //射线检测敌人
+        // レイキャストによる敵の検出
         Vector3 direction = rayEnd.position - rayStart.position;
         float distance = direction.magnitude;
         RaycastHit[] hits = Physics.SphereCastAll(rayStart.position, radius, direction.normalized, distance, targetMask);
@@ -171,7 +171,7 @@ public class BoneController : MonoBehaviour,  IDamageable
             }
         }
     }
-    //状态机
+    // 状態遷移機械（ステートマシン）
     public void EnemyStateSwitch()
     {
         if (agent.enabled)
@@ -234,13 +234,13 @@ public class BoneController : MonoBehaviour,  IDamageable
         yield return new WaitForSeconds(1f);
         agent.enabled = true;
     }
-    //平滑转向攻击者携程
+    // 攻撃者へスムーズに振り向くコルーチン
     public IEnumerator SmoothLookAt(Vector3 targetPosition)
     {
         float elapsed = 0f;
         float duration = 0.15f;
         Quaternion startRotation = transform.rotation;
-        //计算水平方向
+        // 水平方向の計算
         Vector3 direction = (targetPosition - transform.position).normalized;
         direction.y = 0;
         if (direction != Vector3.zero)
@@ -250,11 +250,11 @@ public class BoneController : MonoBehaviour,  IDamageable
             {
                 //平滑过渡，Quaternion.Slerp函数在两个旋转之间进行球面线性插值，返回一个新的旋转，第三个参数控制插值的程度，0返回startRotation，1返回targetRotation
                 transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / duration);
-                //增量时间，逐渐增加elapsed的值，直到达到duration
+                // 経過時間：durationに達するまで、elapsedの値を徐々に増加させる
                 elapsed += Time.deltaTime;
                 yield return null;
             }
-            //确保最终旋转是目标旋转
+            // 最終的な回転が目標の回転（targetRotation）になることを保証する
             transform.rotation = targetRotation;
         }
     }

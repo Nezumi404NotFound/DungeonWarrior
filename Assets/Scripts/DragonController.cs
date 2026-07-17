@@ -155,13 +155,14 @@ public class DragonController : MonoBehaviour, IDamageable
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             while (elapsed < duration)
             {
-                //平滑过渡，Quaternion.Slerp函数在两个旋转之间进行球面线性插值，返回一个新的旋转，第三个参数控制插值的程度，0返回startRotation，1返回targetRotation
+                // スムーズな遷移：Quaternion.Slerp関数は2つの回転間を球面線形補間し、新しい回転を返す。第3引数で補間の度合いを制御し、0ならstartRotation、1ならtargetRotationを返す。
                 transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / duration);
-                //增量时间，逐渐增加elapsed的值，直到达到duration
+                transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / duration);
+                // 経過時間：durationに達するまで、elapsedの値を徐々に増加させる
                 elapsed += Time.deltaTime;
                 yield return null;
             }
-            //确保最终旋转是目标旋转
+            // 最終的な回転が目標の回転（targetRotation）になることを保証する
             transform.rotation = targetRotation;
         }
     }
@@ -170,10 +171,10 @@ public class DragonController : MonoBehaviour, IDamageable
         while (true)
         {
             if (isFiring) yield break;
-            //检测场景是否存在火焰
+            // シーン内に炎が存在するか検出
             if (firePoint.activeInHierarchy)
             {
-                //龙焰攻击检测
+                // ドラゴンブレスの攻撃検出
                 RaycastHit hit;
                 if (Physics.SphereCast(firePoint.transform.position, 2.0f, firePoint.transform.forward, out hit, 10f))
                 {
